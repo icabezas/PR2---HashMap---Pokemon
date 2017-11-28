@@ -208,12 +208,15 @@ public class ModificarPkmn extends javax.swing.JDialog {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         playClick("sounds/apress.wav");
-        Pokemon pkmnModificar = Menu.pokemons.get(cbNames.getSelectedItem().toString());
+        Pokemon pkmnActual = Menu.pokemons.get(cbNames.getSelectedItem().toString());
+        Pokemon pkmnModificar = pkmnActual;
         pkmnModificar.setNombre(intNombre.getText());
         pkmnModificar.setAtaque((Integer) intAtaque.getValue());
         pkmnModificar.setDefensa((Integer) intDefensa.getValue());
         pkmnModificar.setPtsSalud((Integer) intPtsSalud.getValue());
-        pkmnModificar.setIcon(iconPkmn);
+        if (!image.getIcon().equals(pkmnActual.getIcon())){
+            pkmnModificar.setIcon(iconPkmn);
+        }
         if (pkmnModificar instanceof pr2.hashmap.PokemonAgua) {
             if (rbDulce.isSelected()) {
                 ((PokemonAgua) pkmnModificar).setTipoAgua("dulce");
@@ -223,6 +226,8 @@ public class ModificarPkmn extends javax.swing.JDialog {
         } else if (pkmnModificar instanceof pr2.hashmap.PokemonPlanta) {
             ((PokemonPlanta) pkmnModificar).setHabitat(intHabitat.getText());
         }
+        Menu.pokemons.remove(cbNames.getSelectedItem().toString());
+        Menu.pokemons.put(intNombre.getText(), pkmnModificar);
         JOptionPane.showMessageDialog(null, "Pokemon modificado correctamente");
         dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
