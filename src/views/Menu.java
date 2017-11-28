@@ -179,7 +179,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
         playClick("sounds/apress.wav");
-        if (pokemonsCapturados.isEmpty()) {
+        if (pokemons.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay pokemons registrados!");
         } else {
             new ModificarPkmn(this, rootPaneCheckingEnabled).setVisible(true);
