@@ -7,7 +7,9 @@ package views;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import pr2.hashmap.Pokemon;
+import static views.Menu.playClick;
 
 /**
  *
@@ -25,7 +27,9 @@ public class VerPokemon extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         controlButtons(0);
-        showInfoPkmn(0, getTipoSelected());
+        if (!Menu.pokemons.isEmpty()) {
+            showInfoPkmn(0, getTipoSelected());
+        }
         log();
     }
 
@@ -246,31 +250,37 @@ public class VerPokemon extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        playClick("sounds/apress.wav");
         position++;
         showInfoPkmn(position, getTipoSelected());
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+        playClick("sounds/apress.wav");
         position--;
         showInfoPkmn(position, getTipoSelected());
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void rdBtnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnTodosActionPerformed
+        playClick("sounds/apress.wav");
         position = 0;
         showInfoPkmn(0, "todos");
     }//GEN-LAST:event_rdBtnTodosActionPerformed
 
     private void rdBtnFuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnFuegoActionPerformed
+        playClick("sounds/apress.wav");
         position = 0;
         showInfoPkmn(0, "fuego");
     }//GEN-LAST:event_rdBtnFuegoActionPerformed
 
     private void rdBtnAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnAguaActionPerformed
+        playClick("sounds/apress.wav");
         position = 0;
         showInfoPkmn(0, "agua");
     }//GEN-LAST:event_rdBtnAguaActionPerformed
 
     private void rdBtnPlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnPlantaActionPerformed
+        playClick("sounds/apress.wav");
         position = 0;
         showInfoPkmn(0, "planta");
     }//GEN-LAST:event_rdBtnPlantaActionPerformed

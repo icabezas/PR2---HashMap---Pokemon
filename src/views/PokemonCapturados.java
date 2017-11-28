@@ -9,6 +9,7 @@ import javax.swing.DefaultListModel;
 import pr2.hashmap.Pokemon;
 import pr2.hashmap.PokemonAgua;
 import pr2.hashmap.PokemonPlanta;
+import static views.Menu.playClick;
 
 /**
  *
@@ -141,6 +142,7 @@ public class PokemonCapturados extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listPkmnCapturadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPkmnCapturadosMouseClicked
+        playClick("sounds/apress.wav");
         Pokemon pkmnSelected = null;
         if (listPkmnCapturados.getSelectedValue() != null) {
             pkmnSelected = Menu.pokemons.get(listPkmnCapturados.getSelectedValue());

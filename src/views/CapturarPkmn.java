@@ -5,9 +5,22 @@
  */
 package views;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.Timer;
 import pr2.hashmap.Pokemon;
+import static views.Menu.playClick;
 
 /**
  *
@@ -107,21 +120,33 @@ public class CapturarPkmn extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCapturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarActionPerformed
+        playClick("sounds/apress.wav");
         if (listPkmn.getSelectedValue() != null) {
             Pokemon pkmnCapturar = Menu.pokemons.get(listPkmn.getSelectedValue());
             boolean capturado = pkmnCapturar.capturar();
-            if (capturado) {
-                lblCapturando.setText("Capturado!");
-                Menu.pokemonsCapturados.put(listPkmn.getSelectedValue(), pkmnCapturar);
-                inicializarLista();
-            } else {
-                lblCapturando.setText("No capturado!");
-            }
+            int delay = 2000;
+            Timer timer = new Timer(delay, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (capturado) {
+                        lblCapturando.setText("CAPTURADO!");
+                        Menu.pokemonsCapturados.put(listPkmn.getSelectedValue(), pkmnCapturar);
+                        inicializarLista();
+                    } else {
+                        lblCapturando.setText("NO CAPTURADO!");
+                    }
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
+
         }
+
     }//GEN-LAST:event_btnCapturarActionPerformed
 
 
     private void listPkmnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPkmnMouseClicked
+        playClick("sounds/apress.wav");
         Pokemon pkmnSelected = null;
         if (listPkmn.getSelectedValue() != null) {
             pkmnSelected = Menu.pokemons.get(listPkmn.getSelectedValue());

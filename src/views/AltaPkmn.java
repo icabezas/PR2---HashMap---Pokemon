@@ -21,6 +21,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import pr2.hashmap.PokemonAgua;
 import pr2.hashmap.PokemonFuego;
 import pr2.hashmap.PokemonPlanta;
+import static views.Menu.playClick;
 
 /**
  *
@@ -162,26 +163,6 @@ public class AltaPkmn extends javax.swing.JDialog {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTipo)
-                        .addGap(18, 18, 18)
-                        .addComponent(fuego)
-                        .addGap(53, 53, 53)
-                        .addComponent(agua))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(14, 14, 14)
-                                    .addComponent(lblAtaque))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(7, 7, 7)
-                                    .addComponent(intAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblDefensa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(intDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -191,22 +172,42 @@ public class AltaPkmn extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dulce)
-                                    .addComponent(salada))
+                                    .addComponent(salada)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addComponent(intAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(5, 5, 5)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(intHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(intHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36))
-                            .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDefensa)
+                                    .addComponent(intDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPtsSalud)
+                                    .addComponent(intPtsSalud, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTipo)
+                        .addGap(18, 18, 18)
+                        .addComponent(fuego)
+                        .addGap(53, 53, 53)
+                        .addComponent(agua))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblAtaque))
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGuardar)
                     .addComponent(planta)
-                    .addComponent(lblPtsSalud)
-                    .addComponent(intPtsSalud, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnImage))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,15 +216,10 @@ public class AltaPkmn extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(planta)
-                        .addGap(78, 78, 78)
-                        .addComponent(lblPtsSalud)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(intPtsSalud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnImage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGuardar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(64, 64, 64)
+                        .addComponent(btnGuardar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTipo)
@@ -231,47 +227,53 @@ public class AltaPkmn extends javax.swing.JDialog {
                             .addComponent(agua))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblAtaque)
-                            .addComponent(lblDefensa))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(intDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(intAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblAtaque)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(intAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblDefensa)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(intDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPtsSalud)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(intPtsSalud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblHabitat)
                             .addComponent(intHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
                                 .addComponent(lblTipoAgua)
                                 .addGap(18, 18, 18)
                                 .addComponent(dulce)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(salada)
-                                .addGap(8, 8, 8))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))))
+                                .addComponent(salada))
+                            .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 27, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void saladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saladaActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_saladaActionPerformed
 
     private void fuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuegoActionPerformed
-        // TODO add your handling code here:
         this.getContentPane().setBackground(Color.decode("#FF8F77"));
         showOrHideElements();
     }//GEN-LAST:event_fuegoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        playClick("sounds/apress.wav");
         if (Menu.pokemons.containsKey(intNombre.getText())) {
             JOptionPane.showMessageDialog(null, "Este nombre ya existe");
         } else if (intNombre.getText().equals("")) {
@@ -281,18 +283,18 @@ public class AltaPkmn extends javax.swing.JDialog {
                 PokemonFuego pkmnFuego = new PokemonFuego(intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue(), iconPkmn);
                 Menu.pokemons.put(intNombre.getText(), pkmnFuego);
                 JOptionPane.showMessageDialog(null, "Pokemon añadido correctamente");
-                intNombre.setText("");
+                dispose();
             } else if (agua.isSelected()) {
                 if (dulce.isSelected()) {
                     PokemonAgua pkmnAgua = new PokemonAgua(dulce.getText(), intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue(), iconPkmn);
                     Menu.pokemons.put(intNombre.getText(), pkmnAgua);
                     JOptionPane.showMessageDialog(null, "Pokemon añadido correctamente");
-                    intNombre.setText("");
+                    dispose();
                 } else {
                     PokemonAgua pkmnAgua = new PokemonAgua(salada.getText(), intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue(), iconPkmn);
                     Menu.pokemons.put(intNombre.getText(), pkmnAgua);
                     JOptionPane.showMessageDialog(null, "Pokemon añadido correctamente");
-                    intNombre.setText("");
+                    dispose();
                 }
             } else if (planta.isSelected()) {
                 if (intHabitat.getText().equals("")) {
@@ -301,7 +303,7 @@ public class AltaPkmn extends javax.swing.JDialog {
                     PokemonPlanta pkmnPlanta = new PokemonPlanta(intHabitat.getText(), intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue(), iconPkmn);
                     Menu.pokemons.put(intNombre.getText(), pkmnPlanta);
                     JOptionPane.showMessageDialog(null, "Pokemon añadido correctamente");
-                    intNombre.setText("");
+                    dispose();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
@@ -338,12 +340,12 @@ public class AltaPkmn extends javax.swing.JDialog {
     }//GEN-LAST:event_dulceActionPerformed
 
     private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
+        playClick("sounds/apress.wav");
         JFileChooser fc = new JFileChooser();
         FileFilter filter = new FileNameExtensionFilter("JPEG file", "jpg", "jpeg");
         fc.setFileFilter(filter);
         int response = fc.showOpenDialog(null);
         try {
-
             if (response == JFileChooser.APPROVE_OPTION) {
                 String pathName = fc.getSelectedFile().getPath();
                 BufferedImage profile = ImageIO.read(fc.getSelectedFile());

@@ -5,9 +5,28 @@
  */
 package views;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import pr2.hashmap.Pokemon;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 
 /**
  *
@@ -17,8 +36,19 @@ public class Menu extends javax.swing.JFrame {
 
     public static Map<String, Pokemon> pokemons = new HashMap<String, Pokemon>();
     public static Map<String, Pokemon> pokemonsCapturados = new HashMap<String, Pokemon>();
+
     public Menu() {
         initComponents();
+        
+        //suena musica
+        playClick("sounds/casino.wav");
+
+        //logo titulo
+        ImageIcon iconLogo = new ImageIcon("images/logo.png");
+        Image newimg = iconLogo.getImage().getScaledInstance(image.getWidth(), image.getHeight(), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        iconLogo = new ImageIcon(newimg);
+        image.setIcon(iconLogo);
+
     }
 
     /**
@@ -36,6 +66,7 @@ public class Menu extends javax.swing.JFrame {
         capturarBtn = new javax.swing.JButton();
         totalesBtn = new javax.swing.JButton();
         verCapturados = new javax.swing.JButton();
+        image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,71 +119,117 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(totalesBtn))
+                        .addGap(98, 98, 98)
+                        .addComponent(verCapturados))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(capturarBtn)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(verBtn)
-                                    .addComponent(altaBtn)))))
+                        .addGap(145, 145, 145)
+                        .addComponent(verBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(altaBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(127, 127, 127)
-                        .addComponent(modificarBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(verCapturados)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(capturarBtn)
+                                .addComponent(modificarBtn)))))
+                .addContainerGap(107, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(totalesBtn)
+                .addGap(158, 158, 158))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(10, 10, 10)
+                .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(altaBtn)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(modificarBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(verBtn)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(capturarBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(verCapturados)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(totalesBtn)
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void altaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaBtnActionPerformed
-        // TODO add your handling code here:
-//        this.setVisible(false);
+        playClick("sounds/apress.wav");
         new AltaPkmn(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_altaBtnActionPerformed
 
     private void verBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBtnActionPerformed
-        new VerPokemon(this, rootPaneCheckingEnabled).setVisible(true);
+        playClick("sounds/apress.wav");
+        if (Menu.pokemons.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay pokemons registrados!");
+        } else {
+            new VerPokemon(this, rootPaneCheckingEnabled).setVisible(true);
+        }
     }//GEN-LAST:event_verBtnActionPerformed
 
     private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
-        new ModificarPkmn(this, rootPaneCheckingEnabled).setVisible(true);
+        playClick("sounds/apress.wav");
+        if (pokemonsCapturados.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay pokemons registrados!");
+        } else {
+            new ModificarPkmn(this, rootPaneCheckingEnabled).setVisible(true);
+        }
     }//GEN-LAST:event_modificarBtnActionPerformed
 
     private void totalesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalesBtnActionPerformed
+        playClick("sounds/apress.wav");
         new TodosPkmns(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_totalesBtnActionPerformed
 
     private void capturarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capturarBtnActionPerformed
-        new CapturarPkmn(this, rootPaneCheckingEnabled).setVisible(true);
+        playClick("sounds/apress.wav");
+        if (Menu.pokemons.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay pokemons registrados!");
+        } else {
+            new CapturarPkmn(this, rootPaneCheckingEnabled).setVisible(true);
+        }
     }//GEN-LAST:event_capturarBtnActionPerformed
 
     private void verCapturadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verCapturadosActionPerformed
-        new PokemonCapturados(this, rootPaneCheckingEnabled).setVisible(true);
+        playClick("sounds/apress.wav");
+        if (pokemonsCapturados.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay pokemons capturados!");
+        } else {
+            new PokemonCapturados(this, rootPaneCheckingEnabled).setVisible(true);
+        }
     }//GEN-LAST:event_verCapturadosActionPerformed
+
+    public static void playClick(String file) {
+        AudioInputStream audioInputStream = null;
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(new File(file).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(CapturarPkmn.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CapturarPkmn.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(CapturarPkmn.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                audioInputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(CapturarPkmn.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -192,6 +269,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton altaBtn;
     private javax.swing.JButton capturarBtn;
+    private javax.swing.JLabel image;
     private javax.swing.JButton modificarBtn;
     private javax.swing.JButton totalesBtn;
     private javax.swing.JButton verBtn;

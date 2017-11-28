@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import pr2.hashmap.Pokemon;
 import pr2.hashmap.PokemonAgua;
 import pr2.hashmap.PokemonPlanta;
+import static views.Menu.playClick;
 
 /**
  *
@@ -206,6 +207,7 @@ public class ModificarPkmn extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        playClick("sounds/apress.wav");
         Pokemon pkmnModificar = Menu.pokemons.get(cbNames.getSelectedItem().toString());
         pkmnModificar.setNombre(intNombre.getText());
         pkmnModificar.setAtaque((Integer) intAtaque.getValue());
@@ -226,6 +228,7 @@ public class ModificarPkmn extends javax.swing.JDialog {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void cbNamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamesActionPerformed
+        playClick("sounds/apress.wav");
         setElements(cbNames.getSelectedItem().toString());
     }//GEN-LAST:event_cbNamesActionPerformed
 
@@ -261,6 +264,7 @@ public class ModificarPkmn extends javax.swing.JDialog {
     }
 
     private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
+        playClick("sounds/apress.wav");
         JFileChooser fc = new JFileChooser();
         FileFilter filter = new FileNameExtensionFilter("JPEG file", "jpg", "jpeg", "PNG file", "png");
         fc.setFileFilter(filter);
