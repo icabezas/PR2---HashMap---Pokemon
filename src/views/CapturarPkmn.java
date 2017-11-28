@@ -5,6 +5,7 @@
  */
 package views;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -17,6 +18,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.Timer;
 import pr2.hashmap.Pokemon;
@@ -35,8 +37,7 @@ public class CapturarPkmn extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         inicializarLista();
-        for (Pokemon p : Menu.pokemonsCapturados.values()) {
-        }
+        putImgPokeball();
     }
 
     /**
@@ -51,9 +52,9 @@ public class CapturarPkmn extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         listPkmn = new javax.swing.JList<>();
         image = new javax.swing.JLabel();
-        btnCapturar = new javax.swing.JButton();
         lblCapturando = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        imgPokeball = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,16 +66,15 @@ public class CapturarPkmn extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(listPkmn);
 
-        btnCapturar.setText("CAPTURAR!");
-        btnCapturar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapturarActionPerformed(evt);
-            }
-        });
-
         lblCapturando.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel1.setText("Lista pkmns sin capturar:");
+
+        imgPokeball.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgPokeballMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,31 +86,29 @@ public class CapturarPkmn extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCapturando, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCapturar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblCapturando, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addComponent(imgPokeball, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnCapturar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
+                    .addComponent(imgPokeball, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblCapturando, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 11, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,7 +117,28 @@ public class CapturarPkmn extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCapturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarActionPerformed
+    private void putImgPokeball() {
+        ImageIcon iconLogo = new ImageIcon("images/Pokeball.png");
+        Image newimg = iconLogo.getImage().getScaledInstance(imgPokeball.getWidth(), imgPokeball.getHeight(), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        iconLogo = new ImageIcon(newimg);
+        imgPokeball.setIcon(iconLogo);
+    }
+
+    private void listPkmnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPkmnMouseClicked
+        playClick("sounds/apress.wav");
+        Pokemon pkmnSelected = null;
+        if (listPkmn.getSelectedValue() != null) {
+            pkmnSelected = Menu.pokemons.get(listPkmn.getSelectedValue());
+            if (pkmnSelected.getIcon() != null) {
+                image.setIcon(pkmnSelected.getIcon());
+            } else {
+                image.setText("No hay imagen");
+                image.setIcon(null);
+            }
+        }
+    }//GEN-LAST:event_listPkmnMouseClicked
+
+    private void imgPokeballMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPokeballMouseClicked
         playClick("sounds/apress.wav");
         if (listPkmn.getSelectedValue() != null) {
             Pokemon pkmnCapturar = Menu.pokemons.get(listPkmn.getSelectedValue());
@@ -141,23 +160,7 @@ public class CapturarPkmn extends javax.swing.JDialog {
             timer.start();
 
         }
-
-    }//GEN-LAST:event_btnCapturarActionPerformed
-
-
-    private void listPkmnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPkmnMouseClicked
-        playClick("sounds/apress.wav");
-        Pokemon pkmnSelected = null;
-        if (listPkmn.getSelectedValue() != null) {
-            pkmnSelected = Menu.pokemons.get(listPkmn.getSelectedValue());
-            if (pkmnSelected.getIcon() != null) {
-                image.setIcon(pkmnSelected.getIcon());
-            } else {
-                image.setText("No hay imagen");
-                image.setIcon(null);
-            }
-        }
-    }//GEN-LAST:event_listPkmnMouseClicked
+    }//GEN-LAST:event_imgPokeballMouseClicked
 
     private void inicializarLista() {
         listPkmn.removeAll();
@@ -172,8 +175,8 @@ public class CapturarPkmn extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCapturar;
     private javax.swing.JLabel image;
+    private javax.swing.JLabel imgPokeball;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCapturando;

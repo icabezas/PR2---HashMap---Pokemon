@@ -153,12 +153,16 @@ public class PokemonCapturados extends javax.swing.JDialog {
                 image.setIcon(null);
             }
             if (pkmnSelected instanceof pr2.hashmap.PokemonAgua) {
+                lblTipoAgua.setVisible(true);
                 lblTipo.setText("Tipo: Agua");
                 lblTipoAgua.setText("Agua: " + ((PokemonAgua) pkmnSelected).getTipoAgua());
             } else if (pkmnSelected instanceof pr2.hashmap.PokemonPlanta) {
+                lblHabitat.setVisible(true);
                 lblTipo.setText("Tipo: Planta");
                 lblHabitat.setText("Habitat: " + ((PokemonPlanta) pkmnSelected).getHabitat());
             } else {
+                lblTipoAgua.setVisible(false);
+                lblHabitat.setVisible(false);
                 lblTipo.setText("Tipo: Fuego");
             }
             lblNombre.setText("Nombre: " + pkmnSelected.getNombre());

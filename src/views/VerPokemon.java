@@ -26,11 +26,25 @@ public class VerPokemon extends javax.swing.JDialog {
     public VerPokemon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        controlButtons(0);
+
         if (!Menu.pokemons.isEmpty()) {
             showInfoPkmn(0, getTipoSelected());
         }
+        checkExistingTipes();
+        controlButtons(0);
+        checkSize();
         log();
+    }
+
+    public void checkSize() {
+        System.out.println(pokemonTipo.size());
+        if (pokemonTipo.size() == 1) {
+            btnSiguiente.setEnabled(false);
+        } else {
+            System.out.println("mal");
+            btnSiguiente.setEnabled(true);
+        }
+        
     }
 
     public void log() {
@@ -39,6 +53,22 @@ public class VerPokemon extends javax.swing.JDialog {
                 System.out.println(p.getNombre());
             }
             System.out.println("tamaño pokemonTipo = " + pokemonTipo.size());
+        }
+    }
+    
+    public void checkExistingTipes(){
+        rdBtnPlanta.setVisible(false);
+        rdBtnFuego.setVisible(false);
+        rdBtnAgua.setVisible(false);
+
+        for (Pokemon p : pokemonTipo) {
+            if (p instanceof pr2.hashmap.PokemonPlanta) {
+                rdBtnPlanta.setVisible(true);
+            } else if (p instanceof pr2.hashmap.PokemonFuego) {
+                rdBtnFuego.setVisible(true);
+            } else {
+                rdBtnAgua.setVisible(true);
+            }
         }
     }
 
@@ -263,30 +293,38 @@ public class VerPokemon extends javax.swing.JDialog {
 
     private void rdBtnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnTodosActionPerformed
         playClick("sounds/apress.wav");
+        controlButtons(0);
+        checkSize();
         position = 0;
-        showInfoPkmn(0, "todos");
+        showInfoPkmn(0, getTipoSelected());
     }//GEN-LAST:event_rdBtnTodosActionPerformed
 
     private void rdBtnFuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnFuegoActionPerformed
+
         playClick("sounds/apress.wav");
+        controlButtons(0);
+        checkSize();
         position = 0;
-        showInfoPkmn(0, "fuego");
+        showInfoPkmn(0, getTipoSelected());
     }//GEN-LAST:event_rdBtnFuegoActionPerformed
 
     private void rdBtnAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnAguaActionPerformed
         playClick("sounds/apress.wav");
+        controlButtons(0);
+        checkSize();
         position = 0;
-        showInfoPkmn(0, "agua");
+        showInfoPkmn(0, getTipoSelected());
     }//GEN-LAST:event_rdBtnAguaActionPerformed
 
     private void rdBtnPlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnPlantaActionPerformed
         playClick("sounds/apress.wav");
+        controlButtons(0);
+        checkSize();
         position = 0;
-        showInfoPkmn(0, "planta");
+        showInfoPkmn(0, getTipoSelected());
     }//GEN-LAST:event_rdBtnPlantaActionPerformed
 
-    public void showInfoPkmn(int position, String tipo) {
-        controlButtons(position);
+    public void initializeArray(String tipo) {
         if (tipo.equalsIgnoreCase("TODOS")) {
             pokemonTipo.clear();
             for (Pokemon p : Menu.pokemons.values()) {
@@ -304,38 +342,57 @@ public class VerPokemon extends javax.swing.JDialog {
                 }
             }
         }
-        Pokemon pokemonActual = pokemonTipo.get(position);
-        textNombre.setText(pokemonActual.getNombre());
-        textAtaque.setText(String.valueOf(pokemonActual.getAtaque()));
-        textDefensa.setText(String.valueOf(pokemonActual.getDefensa()));
-        textPtsSalud.setText(String.valueOf(pokemonActual.getPtsSalud()));
-        image.setIcon(pokemonActual.getIcon());
-        if (pokemonActual instanceof pr2.hashmap.PokemonAgua) {
-            this.getContentPane().setBackground(Color.decode("#77CBFF"));
-            textTipo.setText("Agua");
-            lblExtraInfo.setText(((pr2.hashmap.PokemonAgua) pokemonActual).getTipoAgua());
-        } else if (pokemonActual instanceof pr2.hashmap.PokemonPlanta) {
-            this.getContentPane().setBackground(Color.decode("#90FF77"));
-            textTipo.setText("Planta");
-            lblExtraInfo.setText(((pr2.hashmap.PokemonPlanta) pokemonActual).getHabitat());
+    }
+
+    public void showInfoPkmn(int position, String tipo) {
+        controlButtons(position);
+        initializeArray(tipo);
+        if (pokemonTipo.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No hay pokemons de ese tipo");
+            rdBtnTodos.setSelected(true);
         } else {
-            this.getContentPane().setBackground(Color.decode("#FF8F77"));
-            textTipo.setText("Fuego");
+            Pokemon pokemonActual = pokemonTipo.get(position);
+            textNombre.setText(pokemonActual.getNombre());
+            textAtaque.setText(String.valueOf(pokemonActual.getAtaque()));
+            textDefensa.setText(String.valueOf(pokemonActual.getDefensa()));
+            textPtsSalud.setText(String.valueOf(pokemonActual.getPtsSalud()));
+            image.setIcon(pokemonActual.getIcon());
+            if (pokemonActual instanceof pr2.hashmap.PokemonAgua) {
+                this.getContentPane().setBackground(Color.decode("#77CBFF"));
+                textTipo.setText("Agua");
+                lblExtraInfo.setText(((pr2.hashmap.PokemonAgua) pokemonActual).getTipoAgua());
+            } else if (pokemonActual instanceof pr2.hashmap.PokemonPlanta) {
+                this.getContentPane().setBackground(Color.decode("#90FF77"));
+                textTipo.setText("Planta");
+                lblExtraInfo.setText(((pr2.hashmap.PokemonPlanta) pokemonActual).getHabitat());
+            } else {
+                this.getContentPane().setBackground(Color.decode("#FF8F77"));
+                textTipo.setText("Fuego");
+            }
+            System.out.println("log: ");
+            log();
         }
-        System.out.println("log: ");
-        log();
+
     }
 
     public void controlButtons(int position) {
         if (position == 0) {
             btnAnterior.setEnabled(false);
-            btnSiguiente.setEnabled(true);
+            if (pokemonTipo.size() == 1) {
+                btnSiguiente.setEnabled(false);
+            } else {
+                btnSiguiente.setEnabled(true);
+            }
         } else if (position == pokemonTipo.size() - 1) {
             btnSiguiente.setEnabled(false);
             btnAnterior.setEnabled(true);
         } else {
             btnAnterior.setEnabled(true);
-            btnSiguiente.setEnabled(true);
+            if (pokemonTipo.size() == 1) {
+                btnSiguiente.setEnabled(false);
+            } else {
+                btnSiguiente.setEnabled(true);
+            }
         }
     }
 
