@@ -5,6 +5,8 @@
  */
 package views;
 
+import pr2.hashmap.Pokemon;
+
 /**
  *
  * @author THOR
@@ -17,6 +19,23 @@ public class TodosPkmns extends javax.swing.JDialog {
     public TodosPkmns(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        int planta = 0;
+        int agua = 0;
+        int fuego = 0;
+        int total = Menu.pokemons.values().size();
+        lblTotal.setText(String.valueOf(total));
+        for (Pokemon p : Menu.pokemons.values()) {
+            if (p instanceof pr2.hashmap.PokemonAgua) {
+                agua++;
+            } else if (p instanceof pr2.hashmap.PokemonFuego) {
+                fuego++;
+            } else {
+                planta++;
+            }
+        }
+        lblTotalAgua.setText(String.valueOf(agua));
+        lblTotalPlanta.setText(String.valueOf(planta));
+        lblTotalFuego.setText(String.valueOf(fuego));
     }
 
     /**
@@ -28,47 +47,82 @@ public class TodosPkmns extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        lblTitulo = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        lblTituloFuego = new javax.swing.JLabel();
+        lblTituloPlanta = new javax.swing.JLabel();
+        lblTituloAgua = new javax.swing.JLabel();
+        lblTotalAgua = new javax.swing.JLabel();
+        lblTotalFuego = new javax.swing.JLabel();
+        lblTotalPlanta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Nombre", "Tipo", "", "Title 4"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
-            };
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTitulo.setText("TOTAL POKEMONS");
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        lblTotal.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+
+        lblTituloFuego.setText("TOTAL FUEGO");
+
+        lblTituloPlanta.setText("TOTAL PLANTA");
+
+        lblTituloAgua.setText("TOTAL AGUA");
+
+        lblTotalAgua.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+
+        lblTotalFuego.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+
+        lblTotalPlanta.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblTituloFuego)
+                                    .addGap(51, 51, 51)
+                                    .addComponent(lblTituloPlanta)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblTituloAgua))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(16, 16, 16)
+                                    .addComponent(lblTotalFuego, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblTotalPlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(90, 90, 90)
+                                    .addComponent(lblTotalAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)))
+                            .addComponent(lblTitulo))))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(lblTitulo)
+                .addGap(18, 18, 18)
+                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTituloFuego)
+                    .addComponent(lblTituloPlanta)
+                    .addComponent(lblTituloAgua))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTotalAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotalFuego, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotalPlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,7 +171,13 @@ public class TodosPkmns extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTituloAgua;
+    private javax.swing.JLabel lblTituloFuego;
+    private javax.swing.JLabel lblTituloPlanta;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblTotalAgua;
+    private javax.swing.JLabel lblTotalFuego;
+    private javax.swing.JLabel lblTotalPlanta;
     // End of variables declaration//GEN-END:variables
 }

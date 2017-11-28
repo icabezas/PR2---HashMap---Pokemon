@@ -28,6 +28,8 @@ import pr2.hashmap.PokemonPlanta;
  */
 public class AltaPkmn extends javax.swing.JDialog {
 
+    private ImageIcon iconPkmn = null;
+
     /**
      * Creates new form AltaPkmn
      */
@@ -114,7 +116,13 @@ public class AltaPkmn extends javax.swing.JDialog {
             }
         });
 
+        intAtaque.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
+
+        intPtsSalud.setModel(new javax.swing.SpinnerNumberModel(20, 20, 100, 1));
+
         lblDefensa.setText("Defensa");
+
+        intDefensa.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
 
         lblAtaque.setText("Ataque");
 
@@ -270,25 +278,30 @@ public class AltaPkmn extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Introduce un nombre!");
         } else {
             if (fuego.isSelected()) {
-                System.out.println("fuego");
-                PokemonFuego pkmnFuego = new PokemonFuego(intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue());
+                PokemonFuego pkmnFuego = new PokemonFuego(intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue(), iconPkmn);
                 Menu.pokemons.put(intNombre.getText(), pkmnFuego);
+                JOptionPane.showMessageDialog(null, "Pokemon añadido correctamente");
+                intNombre.setText("");
             } else if (agua.isSelected()) {
-                System.out.println("agua");
                 if (dulce.isSelected()) {
-                    PokemonAgua pkmnAgua = new PokemonAgua(dulce.getText(), intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue());
+                    PokemonAgua pkmnAgua = new PokemonAgua(dulce.getText(), intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue(), iconPkmn);
                     Menu.pokemons.put(intNombre.getText(), pkmnAgua);
+                    JOptionPane.showMessageDialog(null, "Pokemon añadido correctamente");
+                    intNombre.setText("");
                 } else {
-                    PokemonAgua pkmnAgua = new PokemonAgua(salada.getText(), intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue());
+                    PokemonAgua pkmnAgua = new PokemonAgua(salada.getText(), intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue(), iconPkmn);
                     Menu.pokemons.put(intNombre.getText(), pkmnAgua);
+                    JOptionPane.showMessageDialog(null, "Pokemon añadido correctamente");
+                    intNombre.setText("");
                 }
             } else if (planta.isSelected()) {
                 if (intHabitat.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Introduce un habitat!");
                 } else {
-                    System.out.println("planta");
-                    PokemonPlanta pkmnPlanta = new PokemonPlanta(intHabitat.getText(), intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue());
+                    PokemonPlanta pkmnPlanta = new PokemonPlanta(intHabitat.getText(), intNombre.getText(), (Integer) intAtaque.getValue(), (Integer) intDefensa.getValue(), (Integer) intPtsSalud.getValue(), iconPkmn);
                     Menu.pokemons.put(intNombre.getText(), pkmnPlanta);
+                    JOptionPane.showMessageDialog(null, "Pokemon añadido correctamente");
+                    intNombre.setText("");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
@@ -336,29 +349,15 @@ public class AltaPkmn extends javax.swing.JDialog {
                 BufferedImage profile = ImageIO.read(fc.getSelectedFile());
                 Image dimg = profile.getScaledInstance(image.getWidth(), image.getHeight(),
                         Image.SCALE_SMOOTH);
-                ImageIcon icon = new ImageIcon(dimg);
-                image.setIcon(icon);
+                iconPkmn = new ImageIcon(dimg);
+                image.setIcon(iconPkmn);
             } else {
-                JOptionPane.showMessageDialog(null, "Feel Free to Look Later");
+                JOptionPane.showMessageDialog(null, "Error subiendo la foto");
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-//        JFileChooser jFile = new JFileChooser();
-//        jFile.showSaveDialog(null);
-//        jFile.imageUpdate(image2, SOMEBITS, WIDTH, WIDTH, WIDTH, WIDTH)
-//        Path pth = jFile.getSelectedFile().toPath();
-//        image.setIcon(new ImageIcon(image2));
-//        JOptionPane.showMessageDialog(null, pth.toString());
-//        Graphics2D graphics2D = image2.createGraphics();
-//        try {
-//            ImageIO.write(image2, "", new File(pth.toString()));
-//        } catch (IOException ox) {
-//            // TODO: handle exception
-//            ox.printStackTrace();
-//        }
     }//GEN-LAST:event_btnImageActionPerformed
 
     /**
@@ -388,7 +387,6 @@ public class AltaPkmn extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 AltaPkmn dialog = new AltaPkmn(new javax.swing.JFrame(), true);

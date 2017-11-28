@@ -6,6 +6,7 @@
 package pr2.hashmap;
 
 import java.util.Objects;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,12 +18,14 @@ public abstract class Pokemon implements Capturable {
     private int ataque;
     private int defensa;
     private int ptsSalud;
+    private ImageIcon icon;
 
-    public Pokemon(String nombre, int ataque, int defensa, int ptsSalud) {
+    public Pokemon(String nombre, int ataque, int defensa, int ptsSalud, ImageIcon icon) {
         this.nombre = nombre;
         this.ataque = ataque;
         this.defensa = defensa;
         this.ptsSalud = ptsSalud;
+        this.icon = icon;
     }
 
     @Override
@@ -50,6 +53,16 @@ public abstract class Pokemon implements Capturable {
         return true;
     }
 
+    public ImageIcon getIcon() {
+        return icon;
+    }
+
+    public void setIcon(ImageIcon icon) {
+        this.icon = icon;
+    }
+
+    
+    
     public String getNombre() {
         return nombre;
     }

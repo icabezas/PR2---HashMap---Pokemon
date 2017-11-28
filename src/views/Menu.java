@@ -14,8 +14,9 @@ import pr2.hashmap.Pokemon;
  * @author THOR
  */
 public class Menu extends javax.swing.JFrame {
-    public static Map<String,Pokemon> pokemons = new HashMap<String,Pokemon>();
 
+    public static Map<String, Pokemon> pokemons = new HashMap<String, Pokemon>();
+    public static Map<String, Pokemon> pokemonsCapturados = new HashMap<String, Pokemon>();
     public Menu() {
         initComponents();
     }
@@ -34,6 +35,7 @@ public class Menu extends javax.swing.JFrame {
         verBtn = new javax.swing.JButton();
         capturarBtn = new javax.swing.JButton();
         totalesBtn = new javax.swing.JButton();
+        verCapturados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,46 +47,80 @@ public class Menu extends javax.swing.JFrame {
         });
 
         modificarBtn.setText("MODIFICAR POKEMON");
+        modificarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarBtnActionPerformed(evt);
+            }
+        });
 
         verBtn.setText("VER POKEMON");
+        verBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verBtnActionPerformed(evt);
+            }
+        });
 
         capturarBtn.setText("CAPTURAR POKEMON");
+        capturarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capturarBtnActionPerformed(evt);
+            }
+        });
 
         totalesBtn.setText("TOTALES");
+        totalesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalesBtnActionPerformed(evt);
+            }
+        });
+
+        verCapturados.setText("VER POKEMON CAPTURADOS");
+        verCapturados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verCapturadosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(modificarBtn)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(150, 150, 150)
-                            .addComponent(totalesBtn))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(118, 118, 118)
-                            .addComponent(capturarBtn))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(136, 136, 136)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(verBtn)
-                                .addComponent(altaBtn)))))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(totalesBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(capturarBtn)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(verBtn)
+                                    .addComponent(altaBtn)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(modificarBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(verCapturados)))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addComponent(altaBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(modificarBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(verBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(capturarBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(verCapturados)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(totalesBtn)
                 .addGap(21, 21, 21))
         );
@@ -97,6 +133,26 @@ public class Menu extends javax.swing.JFrame {
 //        this.setVisible(false);
         new AltaPkmn(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_altaBtnActionPerformed
+
+    private void verBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBtnActionPerformed
+        new VerPokemon(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_verBtnActionPerformed
+
+    private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
+        new ModificarPkmn(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_modificarBtnActionPerformed
+
+    private void totalesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalesBtnActionPerformed
+        new TodosPkmns(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_totalesBtnActionPerformed
+
+    private void capturarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capturarBtnActionPerformed
+        new CapturarPkmn(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_capturarBtnActionPerformed
+
+    private void verCapturadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verCapturadosActionPerformed
+        new PokemonCapturados(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_verCapturadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,5 +195,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton modificarBtn;
     private javax.swing.JButton totalesBtn;
     private javax.swing.JButton verBtn;
+    private javax.swing.JButton verCapturados;
     // End of variables declaration//GEN-END:variables
 }

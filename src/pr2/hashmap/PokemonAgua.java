@@ -5,6 +5,8 @@
  */
 package pr2.hashmap;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author THOR
@@ -21,17 +23,12 @@ public class PokemonAgua extends Pokemon {
         int numAleatorio = (int) Math.floor(Math.random() * (120 - 20) + 20);
         if ((numAleatorio - super.getPtsSalud()) > super.getDefensa()) {
             capturado = true;
-            System.out.println("POKEMON CAPTURADO!");
-        } else {
-            System.out.println("POKEMON NO CAPTURADO!");
-            //MENSAJE NO CAPTURADO
         }
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return capturado;
     }
 
-    public PokemonAgua(String tipoAgua, String nombre, int ataque, int defensa, int ptsSalud) {
-        super(nombre, ataque, defensa, ptsSalud);
+    public PokemonAgua(String tipoAgua, String nombre, int ataque, int defensa, int ptsSalud, ImageIcon icon) {
+        super(nombre, ataque, defensa, ptsSalud, icon);
         this.tipoAgua = tipoAgua;
     }
 

@@ -5,6 +5,8 @@
  */
 package pr2.hashmap;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author THOR
@@ -21,17 +23,12 @@ public class PokemonPlanta extends Pokemon {
         int numAleatorio = (int) Math.floor(Math.random() * (50));
         if ((numAleatorio + super.getAtaque()) > super.getPtsSalud()) {
             capturado = true;
-            System.out.println("POKEMON CAPTURADO!");
-        } else {
-            System.out.println("POKEMON NO CAPTURADO!");
-            //MENSAJE NO CAPTURADO
         }
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return capturado;
     }
 
-    public PokemonPlanta(String habitat, String nombre, int ataque, int defensa, int ptsSalud) {
-        super(nombre, ataque, defensa, ptsSalud);
+    public PokemonPlanta(String habitat, String nombre, int ataque, int defensa, int ptsSalud, ImageIcon icon) {
+        super(nombre, ataque, defensa, ptsSalud, icon);
         this.habitat = habitat;
     }
 
@@ -43,6 +40,4 @@ public class PokemonPlanta extends Pokemon {
         this.habitat = habitat;
     }
 
-    
-    
 }

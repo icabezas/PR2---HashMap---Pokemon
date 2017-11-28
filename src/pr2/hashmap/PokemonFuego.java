@@ -5,6 +5,8 @@
  */
 package pr2.hashmap;
 
+import javax.swing.ImageIcon;
+
 public class PokemonFuego extends Pokemon {
 
     private String efectivosContra = "agua";
@@ -16,17 +18,12 @@ public class PokemonFuego extends Pokemon {
         int numAleatorio = (int) Math.floor(Math.random() * (60 - 10) + 10);
         if ((numAleatorio + super.getPtsSalud()) > (super.getAtaque() + super.getDefensa())) {
             capturado = true;
-            System.out.println("POKEMON CAPTURADO!");
-        } else {
-            System.out.println("POKEMON NO CAPTURADO!");
-            //MENSAJE NO CAPTURADO
         }
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return capturado;
     }
 
-    public PokemonFuego(String nombre, int ataque, int defensa, int ptsSalud) {
-        super(nombre, ataque, defensa, ptsSalud);
+    public PokemonFuego(String nombre, int ataque, int defensa, int ptsSalud, ImageIcon icon) {
+        super(nombre, ataque, defensa, ptsSalud, icon);
     }
 
 }

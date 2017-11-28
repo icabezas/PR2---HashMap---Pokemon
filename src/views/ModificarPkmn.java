@@ -5,11 +5,25 @@
  */
 package views;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import pr2.hashmap.Pokemon;
+import pr2.hashmap.PokemonAgua;
+import pr2.hashmap.PokemonPlanta;
+
 /**
  *
  * @author THOR
  */
 public class ModificarPkmn extends javax.swing.JDialog {
+
+    private ImageIcon iconPkmn = null;
 
     /**
      * Creates new form ModificarPkmn
@@ -17,6 +31,7 @@ public class ModificarPkmn extends javax.swing.JDialog {
     public ModificarPkmn(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setComboBoxElements();
     }
 
     /**
@@ -28,64 +43,272 @@ public class ModificarPkmn extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        btnModificar = new javax.swing.JButton();
+        cbNames = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        lblAtaque = new javax.swing.JLabel();
+        lblDefensa = new javax.swing.JLabel();
+        lblPtsSalud = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        intDefensa = new javax.swing.JSpinner();
+        intPtsSalud = new javax.swing.JSpinner();
+        intAtaque = new javax.swing.JSpinner();
+        intHabitat = new javax.swing.JTextField();
+        image = new javax.swing.JLabel();
+        btnImage = new javax.swing.JButton();
+        lblHabitat = new javax.swing.JLabel();
+        rbSalada = new javax.swing.JRadioButton();
+        rbDulce = new javax.swing.JRadioButton();
+        lblTipoAgua = new javax.swing.JLabel();
+        intNombre = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        btnModificar.setText("MODIFICAR");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        cbNames.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+        cbNames.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNamesActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("SELLECCIONA UN POKEMON A MODIFICAR");
+
+        lblAtaque.setText("ATAQUE");
+
+        lblDefensa.setText("DEFENSA");
+
+        lblPtsSalud.setText("PTS SALUD:");
+
+        lblNombre.setText("NOMBRE:");
+
+        intDefensa.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
+
+        intPtsSalud.setModel(new javax.swing.SpinnerNumberModel(20, 20, 100, 1));
+
+        intAtaque.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
+
+        image.setBackground(new java.awt.Color(0, 0, 0));
+        image.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnImage.setText("IMAGE");
+        btnImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImageActionPerformed(evt);
+            }
+        });
+
+        lblHabitat.setText("HABITAT");
+
+        buttonGroup1.add(rbSalada);
+        rbSalada.setText("Salda");
+
+        buttonGroup1.add(rbDulce);
+        rbDulce.setText("Dulce");
+
+        lblTipoAgua.setText("TIPO AGUA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnImage)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModificar)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbNames, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(78, 78, 78))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAtaque)
+                    .addComponent(lblDefensa)
+                    .addComponent(lblPtsSalud)
+                    .addComponent(lblNombre)
+                    .addComponent(lblHabitat)
+                    .addComponent(lblTipoAgua))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(intPtsSalud, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(intDefensa, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(intAtaque, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56)
+                        .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rbSalada)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbDulce))
+                    .addComponent(intHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(intNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 131, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNombre)
+                            .addComponent(intNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAtaque)
+                            .addComponent(intAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDefensa)
+                            .addComponent(intDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPtsSalud)
+                            .addComponent(intPtsSalud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbSalada)
+                    .addComponent(rbDulce)
+                    .addComponent(lblTipoAgua))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(intHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHabitat))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificar)
+                    .addComponent(btnImage))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        Pokemon pkmnModificar = Menu.pokemons.get(cbNames.getSelectedItem().toString());
+        pkmnModificar.setNombre(intNombre.getText());
+        pkmnModificar.setAtaque((Integer) intAtaque.getValue());
+        pkmnModificar.setDefensa((Integer) intDefensa.getValue());
+        pkmnModificar.setPtsSalud((Integer) intPtsSalud.getValue());
+        pkmnModificar.setIcon(iconPkmn);
+        if (pkmnModificar instanceof pr2.hashmap.PokemonAgua) {
+            if (rbDulce.isSelected()) {
+                ((PokemonAgua) pkmnModificar).setTipoAgua("dulce");
+            } else {
+                ((PokemonAgua) pkmnModificar).setTipoAgua("salada");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModificarPkmn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModificarPkmn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModificarPkmn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModificarPkmn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } else if (pkmnModificar instanceof pr2.hashmap.PokemonPlanta) {
+            ((PokemonPlanta) pkmnModificar).setHabitat(intHabitat.getText());
         }
-        //</editor-fold>
+        JOptionPane.showMessageDialog(null, "Pokemon modificado correctamente");
+        dispose();
+    }//GEN-LAST:event_btnModificarActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ModificarPkmn dialog = new ModificarPkmn(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+    private void cbNamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamesActionPerformed
+        setElements(cbNames.getSelectedItem().toString());
+    }//GEN-LAST:event_cbNamesActionPerformed
+
+    private void setElements(String pkmnName) {
+        Pokemon pkmnSelected = null;
+        if (!pkmnName.equals("-")) {
+            pkmnSelected = Menu.pokemons.get(pkmnName);
+            intNombre.setText(pkmnName);
+            intAtaque.setValue(pkmnSelected.getAtaque());
+            intDefensa.setValue(pkmnSelected.getDefensa());
+            intPtsSalud.setValue(pkmnSelected.getPtsSalud());
+            image.setIcon(pkmnSelected.getIcon());
+            if (pkmnSelected instanceof pr2.hashmap.PokemonAgua) {
+                lblTipoAgua.setVisible(true);
+                rbSalada.setVisible(true);
+                rbDulce.setVisible(true);
+                if (((PokemonAgua) pkmnSelected).getTipoAgua().equalsIgnoreCase("salada")) {
+                    rbSalada.setSelected(true);
+                } else {
+                    rbDulce.setSelected(true);
+                }
+            } else if (pkmnSelected instanceof pr2.hashmap.PokemonPlanta) {
+                lblHabitat.setVisible(true);
+                intHabitat.setText(((PokemonPlanta) pkmnSelected).getHabitat());
+            } else {
+                lblTipoAgua.setVisible(false);
+                rbSalada.setVisible(false);
+                rbDulce.setVisible(false);
+                lblHabitat.setVisible(false);
+                intHabitat.setVisible(false);
             }
-        });
+        }
+    }
+
+    private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
+        JFileChooser fc = new JFileChooser();
+        FileFilter filter = new FileNameExtensionFilter("JPEG file", "jpg", "jpeg", "PNG file", "png");
+        fc.setFileFilter(filter);
+        int response = fc.showOpenDialog(null);
+        try {
+
+            if (response == JFileChooser.APPROVE_OPTION) {
+                String pathName = fc.getSelectedFile().getPath();
+                BufferedImage profile = ImageIO.read(fc.getSelectedFile());
+                Image dimg = profile.getScaledInstance(image.getWidth(), image.getHeight(),
+                        Image.SCALE_SMOOTH);
+                iconPkmn = new ImageIcon(dimg);
+                image.setIcon(iconPkmn);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error subiendo la foto");
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnImageActionPerformed
+
+    public void setComboBoxElements() {
+        cbNames.removeAll();
+        for (Pokemon p : Menu.pokemons.values()) {
+            cbNames.addItem(p.getNombre());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnImage;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbNames;
+    private javax.swing.JLabel image;
+    private javax.swing.JSpinner intAtaque;
+    private javax.swing.JSpinner intDefensa;
+    private javax.swing.JTextField intHabitat;
+    private javax.swing.JTextField intNombre;
+    private javax.swing.JSpinner intPtsSalud;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblAtaque;
+    private javax.swing.JLabel lblDefensa;
+    private javax.swing.JLabel lblHabitat;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblPtsSalud;
+    private javax.swing.JLabel lblTipoAgua;
+    private javax.swing.JRadioButton rbDulce;
+    private javax.swing.JRadioButton rbSalada;
     // End of variables declaration//GEN-END:variables
 }
